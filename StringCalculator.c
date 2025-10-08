@@ -111,3 +111,34 @@ int Add(const char* numbers) {
     return parse_and_sum(numbers_to_parse, delimiter_buffer);
 }
 
+int main() {
+    printf("StringCalculator Demo\n");
+    printf("====================\n\n");
+    
+    // Test various inputs
+    const char* test_inputs[] = {
+        "",
+        "1",
+        "1,2",
+        "1,2,3,4,5",
+        "1\n2,3",
+        "//;\n1;2",
+        "//[***]\n1***2***3",
+        "2,1001",
+        NULL
+    };
+    
+    for (int i = 0; test_inputs[i] != NULL; i++) {
+        printf("Input: \"%s\"\n", test_inputs[i]);
+        int result = Add(test_inputs[i]);
+        
+        if (calculator_exception.has_error) {
+            printf("Error: %s\n", calculator_exception.message);
+        } else {
+            printf("Result: %d\n", result);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
