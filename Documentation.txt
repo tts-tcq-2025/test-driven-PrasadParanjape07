@@ -1,0 +1,24 @@
+1. Add Method (SUM_StringCalculator)
+
+Checks for empty input: Return 0 if the input string is empty.
+
+Custom delimiter extraction: Call Extract_CustomDelimiter() to determine if a custom delimiter is specified (e.g., //[***]\n).
+
+Number parsing: Splits the normalized string into individual numbers and converts them to integers.
+
+Negative number validation: Checks for negative numbers and throws an exception listing all negatives if any are found.
+
+Sum calculation: Sums all numbers, ignoring any greater than 1000.
+
+2.Develop Supporting Functions
+
+Extract_CustomDelimiter: Parses the input for custom delimiters, handling both single and multi-character delimiters.
+
+Replace_Delimiters: Replaces all instances of the delimiter and newlines with commas.
+
+Parse_Numbers: Converts the comma-separated string into a vector of integers.
+
+Validate_Negatives: Throws an exception if any negative numbers are found.
+
+Calculate_Sum: Sums all numbers ≤ 1000.
+
