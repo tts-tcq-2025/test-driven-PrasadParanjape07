@@ -1,24 +1,40 @@
 1. Add Method (SUM_StringCalculator)
-
 Checks for empty input: Return 0 if the input string is empty.
-
 Custom delimiter extraction: Call Extract_CustomDelimiter() to determine if a custom delimiter is specified (e.g., //[***]\n).
-
 Number parsing: Splits the normalized string into individual numbers and converts them to integers.
-
 Negative number validation: Checks for negative numbers and throws an exception listing all negatives if any are found.
-
 Sum calculation: Sums all numbers, ignoring any greater than 1000.
-
 2.Develop Supporting Functions
-
 Extract_CustomDelimiter: Parses the input for custom delimiters, handling both single and multi-character delimiters.
-
 Replace_Delimiters: Replaces all instances of the delimiter and newlines with commas.
-
 Parse_Numbers: Converts the comma-separated string into a vector of integers.
-
 Validate_Negatives: Throws an exception if any negative numbers are found.
-
 Calculate_Sum: Sums all numbers ≤ 1000.
 
+1. Scope
+Verify a StringCalculator’s Add(input: string) -> int behavior per the provided functional rules:
+Empty string returns 0.
+Support 1 number → that number.
+Support 2 numbers separated by comma.
+Support an unknown number of numbers (comma and/or newline as delimiters).
+Reject malformed pattern with a comma directly followed by newline (clarified but no need to prove—will include a “well‑formed assumption” test).
+Optional custom delimiter declaration line: //<delim>\n<nums> (single char) or //[<delim>]\n<nums> (any length).
+Negative numbers → throw exception with message: negatives not allowed: <list> (all negatives included).
+Ignore numbers > 1000.
+Multi‑character delimiters in brackets, e.g. //[***]\n1***2***3 = 6.
+Example confusion case given: //[]\n12***3 should return 6. (Note: This implies delimiter = [] and input string includes digits “12***3”; ambiguity: the triple asterisks are not the declared delimiter. We will treat this as: numbers parsed = 12 and 3 → 15 OR (if interpreting *** as accidental noise) but requirement text says “should return 6”. Therefore we must interpret example as a misprint OR meaning delimiter is *** and numbers 1,2,3. To preserve fidelity, we add a clarification test noting inconsistency.)
+
+Test Progression (TDD Stages)
+Stage	Focus	New Requirement(s) Introduced
+S1	Empty string	DFR-1
+S2	Single number	DFR-2
+S3	Two numbers	DFR-3
+S4	N numbers	DFR-4
+S5	Newline as alt delimiter	DFR-5
+S6	Custom single-char delimiter	DFR-6
+S7	Negative handling (single / multiple)	DFR-8, DFR-11
+S8	Ignore >1000 & include 1000	DFR-9, DFR-10
+S9	Multi-character delimiter	DFR-7
+S10	Edge & ordering, mixed scenarios	Consolidation
+S11	Format / malformed (optional)	DFR-13
+S12	Complexity & coverage assertion	DFR-14
